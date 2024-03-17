@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Lab Programs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="Program one">
+        <div class="heading">
+            1.String Manipulation
+        </div>
+        <div class="prog">
+            <pre>
+                import java.io.*;
+                public class StringManipulation
+                {
+                    public static void main(String args[])
+                    {
+                        String OriginalString = "Hello,World!";
+                        System.out.println("Original String: "+OriginalString);
+                        int length = OriginalString.length();
+                        String uppercasestring = OriginalString.toUpperCase();
+                        String replacedstring = OriginalString.replace("Hello","Hi");
+                        String additionalstring = "How are you?";
+                        String concatenated = OriginalString.concat(additionalstring);
+                        System.out.println("Length of the String: "+length);
+                        System.out.println("Uppercase String: "+uppercasestring);
+                        System.out.println("String After Replacement: "+replacedstring);
+                        System.out.println("Concatenated String: "+concatenated);
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program two">
+        <div class="heading">
+            2.Multiple Inheritance
+        </div>
+        <div class="prog">
+            <pre>
+                interface Exam
+                {
+	                void percent_cal();
+                }
+                class Student
+                {
+                    String name;
+                    int roll_no,mark1,mark2;
+                    Student(String n,int r,int m1,int m2)
+                    {
+                        name = n;
+                        roll_no = r;
+                        mark1 = m1;
+                        mark2 = m2;
+                    }
+                    void display()
+                    {
+                        System.out.println("Name of the Student: "+name);
+                        System.out.println("Roll.no of the Student: "+roll_no);
+                        System.out.println("Mark of the Subject1: "+mark1);
+                        System.out.println("Mark of the Subject2: "+mark2);
+                    }
+                }
+                class Result extends Student implements Exam
+                {
+                    Result(String n,int r,int m1,int m2)
+                    {
+                        super(n,r,m1,m2);
+                    }
+                    public void percent_cal()
+                    {
+                        int total = (mark1+mark2);
+                        float percent = total * 100 / 200;
+                        System.out.println("Percentage: "+percent+"%");
+                    }
+                    void display()
+                    {
+                        super.display();
+                    }
+                }
+                class Multiple
+                {
+                    public static void main(String args[])
+                    {
+                        Result R = new Result("AjayVikram",201,90,95);
+                        R.display();
+                        R.percent_cal();
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program three">
+        <div class="heading">
+            3.Use of Packages
+        </div>
+        <div class="prog">
+            <pre>
+                public  class Compare
+                {
+                    public int getMax(int x, int y)
+                    {
+                        if ( x > y )
+                        {
+                        return x;
+                        }
+                        else
+                        {
+                        return y;
+                        }
+                    }
+                }
+
+
+                import relational.Compare;
+
+                public class PackageDemo
+                {
+                    public static void main(String args[])
+                    {
+                        int val1 = 7, val2 = 9;
+                        Compare comp = new Compare();
+                        int max = comp.getMax(val1, val2); 
+                        System.out.println("Maximum value is " + max);
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program four">
+        <div class="heading">
+            4.Multithreading
+        </div>
+        <div class="prog">
+            <pre>
+                import java.lang.*;
+                class A extends Thread
+                {
+                    public void run()
+                    {
+                        for(int i=1;i<=5;i++)
+                        {
+                            System.out.println("From Thread A: "+i+"*3= "+(i*3));
+                        }	
+                        System.out.println("Exit from Thread A");
+                    }
+                }
+                class B extends Thread
+                {
+                    public void run()
+                    {
+                        for(int i=1;i<=5;i++)
+                        {
+                            System.out.println("From Thread B: "+i+"*4= "+(i*4));
+                        }	
+                        System.out.println("Exit from Thread B");
+                    }
+                }
+                class C extends Thread
+                {
+                    public void run()
+                    {
+                        for(int i=1;i<=5;i++)
+                        {
+                            System.out.println("From Thread C: "+i+"*5= "+(i*5));
+                        }	
+                        System.out.println("Exit from Thread C");
+                    }
+                }
+                class T2
+                {
+                    public static void main(String args[])
+                    {
+                        A obj = new A();
+                        B obj1 = new B();
+                        C obj2 = new C();
+                        obj.setPriority(1);
+                        obj1.setPriority(7);
+                        obj2.setPriority(10);
+                        System.out.println("Thread A Start");
+                        obj.start();
+                        System.out.println("Thread B Start");
+                        obj1.start();
+                        System.out.println("Thread C Start");
+                        obj2.start();
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program five">
+        <div class="heading">
+            5.Create an Exception and Throw the Exception
+        </div>
+        <div class="prog">
+            <pre>
+                import java.lang.*;
+                import java.io.*;
+                class MyEx extends Exception
+                {
+                    MyEx(String message)
+                    {
+                        super(message);
+                    }
+                }
+                class E3
+                {
+                    public static void main(String args[])
+                    {
+                        int empid,bp;
+                        double da = 0.0F,hra = 0.0F,pf,np,gp;
+                        String name;
+                        try
+                        {
+                            DataInputStream in = new DataInputStream(System.in);
+                            System.out.println("Enter the Employee ID: ");
+                            empid = Integer.parseInt(in.readLine());
+                            System.out.println("Enter the Employee Name: ");
+                            name = in.readLine();
+                            System.out.println("Enter the Basic Pay: ");
+                            bp = Integer.parseInt(in.readLine());
+                            try
+                            {
+                                if((bp<20000) || (bp>=89000))
+                                {
+                                    throw new MyEx("Pay out of Bounds");
+                                }
+                                else
+                                {
+                                    da = 0.12 * bp;
+                                    hra = 0.2 * bp;
+                                    pf = 0.18 * bp;
+                                    np = bp + da + hra;
+                                    gp = np - pf;
+                                    System.out.println();
+                                    System.out.println("Salary Details");
+                                    System.out.println("==============");
+                                    System.out.println("Name: "+name);	
+                                    System.out.println("Basic: "+bp);
+                                    System.out.println("DA: "+da);
+                                    System.out.println("PF: "+pf);
+                                    System.out.println("NET PAY: "+np);
+                                    System.out.println("GROSS PAY: "+gp);
+                                    System.out.println("==============");
+                                }
+                            }
+                            catch(MyEx e)
+                            {
+                                System.out.println("Caught my Exception");
+                                System.out.print(e.getMessage());
+                            }
+                        }
+                        catch(IOException e)
+                        {
+                        }
+                        finally
+                        {
+                            System.out.println("Completed Program Execution");
+                        }
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program six">
+        <div class="heading">
+            6.AWT Program
+        </div>
+        <div class="prog">
+            <pre>
+                import java.awt.*;
+                import java.awt.event.ActionEvent;
+                import java.awt.event.ActionListener;
+                import java.awt.event.WindowAdapter;
+                import java.awt.event.WindowEvent;
+
+                public class MenuExample
+                {
+                    public MenuExample()
+                    {
+                        Frame frame = new frame("Menu Example");
+                        MenuBar menuBar = new MenuBar();
+                        Menu menu = new Menu("File");
+                        
+                        MenuItem menuItem1 = new MenuItem("New");
+                        MenuItem menuItem2 = new MenuItem("Open");
+                        MenuItem menuItem3 = new MenuItem("Save");
+                        MenuItem menuItem4 = new MenuItem("Exit");
+                        
+                        menu.add(menuItem1);
+                        menu.add(menuItem2);
+                        menu.add(menuItem3);
+                        menu.add(menuItem4);
+                        
+                        menuBar.add(menu);
+                        frame.setMenuBar(menuBar);
+                        frame.setSize(400,400);
+                        frame.setLayout(null);
+                        frame.setVisible(true);
+                        
+                        frame.addWindowListener(new WindowAdapter()
+                        {
+                            public void windowClosing(WindowEvent windowEvent)
+                            {
+                                System.exit(0);
+                            }
+                        });
+                    }
+                    public static void main(String args[])
+                    {
+                        new MenuExample();
+                    }
+                }
+
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program seven">
+        <div class="heading">
+            7.Simple JList
+        </div>
+        <div class="prog">
+            <pre>
+                import javax.swing.*;  
+                public class ListExample  
+                {  
+                    ListExample()
+                    {  
+                        JFrame f= new JFrame();  
+                        DefaultListModel<String> l1 = new DefaultListModel<>();  
+                        l1.addElement("Item1");  
+                        l1.addElement("Item2");  
+                        l1.addElement("Item3");  
+                        l1.addElement("Item4");  
+                        JList<String> list = new JList<>(l1);  
+                        list.setBounds(100,100, 75,75);  
+                        f.add(list);  
+                        f.setSize(400,400);  
+                        f.setLayout(null);  
+                        f.setVisible(true);  
+                    }  
+                    public static void main(String args[])  
+                    {  
+                        new ListExample();  
+                    }
+                    
+                } 
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program eight">
+        <div class="heading">
+            8.Open an Existing file and Append the text to that file
+        </div>
+        <div class="prog">
+            <pre>
+                import java.io.*;
+                public class AppFile 
+                {
+                    public static void main(String[] args)
+                    {
+                
+                        String strFilePath = "C://javapgms//tat.txt";
+                        try
+                        {
+                            FileOutputStream fos = new FileOutputStream(strFilePath, true);
+                            String strContent = "Append output to a file example";
+                            fos.write(strContent.getBytes());
+                            fos.close(); 
+                    
+                        }
+                        catch(FileNotFoundException ex)
+                        {
+                            System.out.println("FileNotFoundException : " + ex);
+                        }
+                        catch(IOException ioe)
+                        {
+                            System.out.println("IOException : " + ioe);
+                        }
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program nine">
+        <div class="heading">
+            9.Analyze the Gene Sequence
+        </div>
+        <div class="prog">
+            <pre>
+                import java.util.stream.*; 
+                import java.util.Scanner;
+                class gene
+                {
+                public static long count(String s, char ch)
+                {
+                    return s.chars().filter(base -> base == ch).count();
+                }
+                public static void main(String args[])
+                {
+                    Scanner dnaobj = new Scanner(System.in); 
+                    System.out.println("Enter dna:");
+                    String dna = dnaobj.nextLine();
+                    Scanner baseobj=new Scanner(System.in); 
+                    System.out.println("Enter base:");
+                    char base= baseobj.next().charAt(0); 
+                    System.out.println(count(dna,base));
+                }
+                }
+            </pre>
+        </div>
+    </div>
+
+    <div class="Program ten">
+        <div class="heading">
+            10.BioComputing
+        </div>
+        <div class="prog">
+            <pre>
+                public class biocom
+                {
+                    public static int score_match(String subject,String query,int subject_start,int query_start,int length)
+                    { 
+                        int score = 0;
+                        for(int i=0;i < length;i++)
+                        {
+                            char subject_base = subject.charAt(subject_start+i); 
+                            char query_base = query.charAt(query_start+i); 
+                            if(subject_base == query_base)
+                            {
+                                score=score+1;
+                            }
+                            else
+                            {
+                                score=score-1;
+                            }
+                        }
+                        return score;
+                    }
+                    public static void main(String[] args) 
+                    {
+                        String one_sequence = "actgatcgattgatcgatcgatcg"; 
+                        String another_sequence = "tttagatcgatctttgatc";
+                        System.out.println(score_match(one_sequence,another_sequence,7,4,8)); 
+                        System.out.println(score_match(one_sequence, another_sequence, 7, 4, 4));
+                        System.out.println(score_match(one_sequence, another_sequence, 7, 4, 12));
+                        System.out.println(score_match(one_sequence, another_sequence, 10,1,5));
+                    }
+                }
+            </pre>
+        </div>
+    </div>
+    
+</body>
+</html>
